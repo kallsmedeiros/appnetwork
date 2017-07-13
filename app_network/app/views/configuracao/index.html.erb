@@ -1,0 +1,23 @@
+<h3>Configuração:</h3>
+    <div class="total">
+      <div class="cadastro">
+        <form action="/configuracao/index_do">
+          <table>
+            <tr>
+              <td>Tema:</td>
+              <td>
+                <select name="form[tema]" style="width: 240px" >
+                  <option value="<%=@config.try(:tema)%>"><%=@config.try(:tema)%></option>
+                  <option value="white">White</option>
+                  <option value="dark">Dark</option>
+                </select>
+              </td>
+            </tr>
+            </tr>
+            <tr> 
+              <td align="left"><input type="submit" value="Enviar"></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>

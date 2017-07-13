@@ -1,0 +1,135 @@
+<style rel="stylesheet" type="text/css">
+#modal{ background:rgba(0,0,0, 0.5); width:100%; height:100%; position:fixed; left:0; top:0; display:none; z-index: 2;}
+.modal-box{ background:#FFF; width:80%; height:500px; position:absolute; left:50%; top:50%; margin-left:-40%; margin-top:-250px; }
+.fechar{ padding:5px 10px; border:1px solid #CCC; position:absolute; right:3px; top:3px; border-radius:7px; color:#CCC; cursor:pointer;}
+.fechar:hover{ color:#666; border-color:#666;}
+</style>
+<div id="modal">
+  <div class="modal-box">
+    <div class="fechar">X</div>
+    <div class="modal-box-conteudo">
+      <iframe src="" id="terminalFrame" width="100%" marginwidth="0" height="500px" marginheight="0" align="middle" scrolling="auto"></iframe>
+    </div>
+  </div>
+</div>
+<div align=center>
+<% equipamento = @equipamento %>
+<% titulo1 = ['ID', 'Descricao', 'Tipo', 'IP', 'Mascara de Rede', 'Data Backup', 'Cancelado'] 
+   titulo2 = ['Usuario de Alt.', 'Data de Alt.', 'Data de Cadastro', 'Local de Backup', 'Numero de Serie','Mac Address','' ]
+   titulo3 = ['Marca', 'Modelo', 'Versão', 'Data de Garantia','Especificação Tecnica', 'Observações', '']
+   titulo = [titulo1, titulo2, titulo3]
+   linha1 = [equipamento.id, equipamento.descricao, equipamento.tipo, equipamento.ip, equipamento.mascara_rede,
+               equipamento.data_backup] 
+   linha2 = [equipamento.usuario_alteracao_id, equipamento.updated_at.to_date, 
+                equipamento.created_at.to_date, equipamento.local_backup, equipamento.numero_serie, equipamento.mac_address, '']
+   linha3 = [equipamento.marca, equipamento.modelo, equipamento.versao, equipamento.data_garantia,
+             equipamento.especificacao_tecnica, equipamento.observacao, '']
+   conteudo = [linha1, linha2, linha3]
+   contador = 0
+%>
+<div>
+  <table border rules=rows align='center' face="Comic Sans MS, arial, verdana" style="	margin: 1%;">
+  <% titulo.each do |titulo| %>
+    <% cont = conteudo[contador] %>
+    <tr bgcolor="#1E90FF">
+     <% titulo.each do |coluna| %>
+       <td><font size="2" face="Comic Sans MS">&nbsp<%= coluna %></font></td>
+     <% end %>
+    </tr>
+    <tr>
+      <% cont.each do | coluna |%>
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= coluna %></font></td> 
+      <% end %>
+      <% if contador.eql? 0%>
+        <td><font size="2" face="Comic Sans MS">&nbsp
+        <% if equipamento.cancelado.eql? true %>
+        sim 
+        <% else %>
+        não 
+        <% end %>
+          </font>
+       </td> 
+       <%end%>
+     </tr>
+     <%contador = contador+1%>
+    <% end %>
+    </table>
+     <table border rules=rows align='center' face="Comic Sans MS, arial, verdana" style="margin: 1%;">   
+       <tr bgcolor="#1E90FF">
+           <td></td>
+           <td>Login</td>
+           <td>&nbspSenha</td>
+       </tr>
+         <% equipamento.acesso.each do |acesso| %>
+           <tr>
+           <td><input type="radio" name="acesso_id" value="<%= acesso.id %>"></td>
+           <td><font size="2" face="Comic Sans MS">&nbsp<%= acesso.login %></font></td>
+           <td><font size="2" face="Comic Sans MS">&nbsp<%= acesso.senha %></font></td>
+           </tr>
+         <% end %>
+    </table>
+    <a href="javascript:addLogin(<%=equipamento.id%>);"><button>Adicionar login</button></a>
+    <a href="javascript:editarLogin();"><button>Editar login</button></a>
+    <a href="javascript:excluirLogin();"><button>Excluir login</button></a>
+    <a href="javascript:addAlerta(<%=equipamento.id%>);"><button>Editar Alerta</button></a></p>
+    <a href="javascript:editar(<%=equipamento.id%>);"><button>Editar</button></a>
+    <a href="javascript:relatorio(<%=equipamento.id%>);"><button>Relatório</button></a>
+</div>
+</div>
+<script>
+function addLogin(VALOR){
+    var loc = "<%= url_for :controller => 'acesso', :action => 'cadastro' %>?form[equipamento_id]="+VALOR;
+    document.getElementById('terminalFrame').setAttribute('src', loc);
+    modal();
+}
+function editar(VALOR) {
+    var loc = "<%= url_for :controller => 'equipamento', :action => 'editar' %>?form[equipamento_id]="+VALOR;
+    document.getElementById('terminalFrame').setAttribute('src', loc);
+    modal();
+}
+function editarLogin() {
+    var acesso = verificar_selecionado('acesso_id');
+    var loc = "<%= url_for :controller => 'acesso', :action => 'editar' %>?form[acesso_id]="+acesso;
+    document.getElementById('terminalFrame').setAttribute('src', loc);
+    modal();
+}
+
+function excluirLogin() {
+    var acesso = verificar_selecionado('acesso_id');
+    var loc = "<%= url_for :controller => 'acesso', :action => 'excluir' %>?form[acesso_id]="+acesso;
+    document.getElementById('terminalFrame').setAttribute('src', loc);
+    modal();
+}
+
+function relatorio(VALOR) {
+    var acesso = verificar_selecionado(VALOR);
+    var loc = "<%= url_for :controller => 'relatorio', :action => 'inventario_detalhes' %>?form[equipamento_id]="+VALOR;
+    document.getElementById('terminalFrame').setAttribute('src', loc);
+    modal();
+}
+
+function verificar_selecionado(acesso) {
+    var radioButtons = document.getElementsByName(acesso);
+    for (var i = 0; i < radioButtons.length; i++) {
+        if (radioButtons[i].checked) return radioButtons[i].value;
+    }
+    return '';
+}
+
+function addAlerta(VALOR){
+    var loc = "<%= url_for :controller => 'equipamento', :action => 'cadastro_alerta' %>?form[equipamento_id]="+VALOR;
+    document.getElementById('terminalFrame').setAttribute('src', loc);
+    modal();
+}
+
+function modal() {
+  $('#modal').fadeIn(1500);
+  $('.fechar, #modal').click(function(event){   
+    if ( event.target !== this ){
+      return;
+    }
+    $('#modal').fadeOut(500);
+  });
+}
+
+</script>

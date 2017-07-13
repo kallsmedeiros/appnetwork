@@ -1,0 +1,43 @@
+<h3>Inventario Filtrar:</h3>
+<div align=center>
+<form action="/relatorio/inventario_filtrar_do">
+<table>
+  <tr>
+    <td>Equipamento ID:</td>
+    <td>
+      <input type="number" name="form[id]">
+    <td>
+  </tr>
+  <tr>
+    <td>Data de cadastro:</td>
+    <td>
+      <%= date_select('form[data_inicio]', 'date', :start_year => 2000, :end_year => 2200) %>
+    </td>
+  </tr>
+  <tr>
+     <td align=right>
+        até: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     </td>
+     <td>
+      <%= date_select('form[data_fim]', 'date', :start_year => 2000, :end_year => 2200) %>
+    </td>
+  </tr>
+  <tr>
+    <td>Tipo:</td>
+    <td>
+      <select name="form[tipo]" style="width: 240px" >
+        <option value=""></option>
+        <option value="desktop">Desktop</option>
+        <option value="router"> Router </option>
+        <option value="server"> Server </option>
+        <option value="switch"> Switch </option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td align="left"><input type="submit" value="Enviar"></td>
+  </tr>
+ 
+</table>
+</form>
+</div>

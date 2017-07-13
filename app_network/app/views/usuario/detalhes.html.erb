@@ -1,0 +1,55 @@
+<div align=center>
+<form action="/usuario/editar">
+<% titulo1 = ['ID', 'Nome', 'Data Nasc.', 'Sexo', 'CPF', 'Arquivado']%>
+<div>
+  <table border rules=rows align='center' face="Comic Sans MS, arial, verdana">
+    <tr bgcolor="#1E90FF">
+     <% titulo1.each do |coluna| %>
+       <td><font size="3" face="Comic Sans MS">&nbsp<%= coluna %></font></td>
+     <% end %>
+    </tr>
+      <tr>
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.id %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.nome %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.data_nascimento %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.sexo %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.cpf %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp
+              <% if @usuario.arquivado.eql? true %>
+                sim 
+              <% else %>
+                não 
+              <% end %>
+            </font>
+        </td>
+        </tr> 
+        <% titulo2 = ['Receber E-Mail', 'Celular', 'E-mail', 'Usuario de Alt.', 'Data de Alt.', 'Data Cadastro'] %>
+        <tr bgcolor="#1E90FF">
+          <% titulo2.each do |coluna| %>
+            <td><font size="3" face="Comic Sans MS">&nbsp<%= coluna %></font></td>
+          <% end %>
+        </tr>
+        <tr>
+        <td align=center><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.receber_email %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.celular %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.email %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.usuario_alteracao_id %></font></td>
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.updated_at.to_date %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.created_at.to_date %></font></td> 
+     <tr>
+        <% titulo3 = ['Logradouro', '', 'Numero', 'Complemento', 'Municipio', 'Estado'] %>
+     <tr bgcolor="#1E90FF">
+       <% titulo3.each do |coluna| %>
+         <td><font size="3" face="Comic Sans MS">&nbsp<%= coluna %></font></td>
+       <% end %>
+     </tr>
+     <tr>
+       <td colspan="2"><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.logradouro %></font></td> 
+       <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.numero %></font></td> 
+       <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.complemento %></font></td> 
+       <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.municipio %></font></td> 
+       <td><font size="2" face="Comic Sans MS">&nbsp<%= @usuario.estado %></font></td> 
+     </tr>
+  </table>
+</div>
+</div>

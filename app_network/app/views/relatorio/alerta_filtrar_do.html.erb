@@ -1,0 +1,66 @@
+<style rel="stylesheet" type="text/css">
+#modal{ background:rgba(0,0,0, 0.5); width:100%; height:100%; position:fixed; left:0; top:0; display:none; z-index: 2;} 
+.modal-box{ background:#FFF; width:80%; height:500px; position:absolute; left:50%; top:50%; margin-left:-40%; margin-top:-250px; }
+.fechar{ padding:5px 10px; border:1px solid #CCC; position:absolute; right:3px; top:3px; border-radius:7px; color:#CCC; cursor:pointer;}
+.fechar:hover{ color:#666; border-color:#666;}
+</style>
+<div id="modal">
+  <div class="modal-box">
+    <div class="fechar">X</div>
+    <div class="modal-box-conteudo">
+      <iframe src="" id="Frame" width="100%" marginwidth="0" height="500px" marginheight="0" align="middle" scrolling="auto"></iframe>
+    </div>
+  </div>
+</div>
+<div align=center>
+<table border rules=rows align='center' face="Comic Sans MS, arial, verdana" style="	margin: 1%;">
+<% titulos = ["","ID", "Descrição", "Equip. ID", "IP", "Hora"]%>
+  <tr bgcolor="#1E90FF" align=center>
+    <% titulos.each do |titulo|%>
+      <td>
+        <%= titulo %>
+      </td>
+    <% end %>
+   </tr>
+    <% @alertas.each do |alerta|%>
+      <tr>
+        <td>
+            <input type="radio" name="monitoramento_id" value="<%= alerta.monitoramento_id %>"> 
+        </td>
+        <% alerta_array = [alerta.id, alerta.descricao, alerta.equipamento_id, alerta.ip, alerta.created_at.to_s.gsub(' UTC', '')]%>
+        <% alerta_array.each do |item| %>
+          <td align=center>
+            &nbsp<%= item %>&nbsp
+          </td>
+        <% end %>
+        </tr>
+     <% end %>
+</table>
+<%= will_paginate @alertas, :previous_label => image_tag('/imagens/anterior.png', :alt => 'Anterior', :class => 'btn_img') ,:next_label => image_tag('/imagens/proximo.png', :alt => 'Próximo', :class => 'btn_img') , :separator => ' | ', :params => params %> </p>
+<a href="javascript:detalhes();"><button>Detalhes</button></a>
+<a href="<%= url_for :controller => 'relatorio', :action => 'gerar_excel_alerta' %>"><button>Excel</button></a>
+<script>
+function modal() {
+  $('#modal').fadeIn(1500);
+  $('.fechar, #modal').click(function(event){   
+    if ( event.target !== this ){
+      return;
+    }
+    $('#modal').fadeOut(500);
+  });
+}
+function detalhes(){
+    var monitoramento = verificar_selecionado('monitoramento_id');
+    var loc = "<%= url_for :controller => 'relatorio', :action => 'alerta_detalhes' %>?form[monitoramento_id]="+monitoramento;
+    document.getElementById('Frame').setAttribute('src', loc);
+    modal();
+}
+
+function verificar_selecionado(monitoramento) {
+    var radioButtons = document.getElementsByName(monitoramento);
+    for (var i = 0; i < radioButtons.length; i++) {
+        if (radioButtons[i].checked) return radioButtons[i].value;
+    }
+    return '';
+}
+</script>

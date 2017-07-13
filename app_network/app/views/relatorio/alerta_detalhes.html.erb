@@ -1,0 +1,189 @@
+<!--##################################################################################################################################################
+# INICIO                                                         MONITORAMENTO
+###################################################################################################################################################-->
+
+<h3>Monitoramento:</h3>
+<table border rules=rows align='center' face="Comic Sans MS, arial, verdana" style="	margin: 1%;">
+<% titulo1 = ["ID", "IP", "Equipamento ID", "Descrição Equipamento", "Hora do Registro", "Sistema Iniciado"]%>
+<% titulo2 = ["CPU usuario", "CPU sistema", "CPU ociosa", "CPU ociosa", "Tamanho de SWAP", "SWAP Disp."]%>
+<% titulo3 = ["Tamanho RAM", "RAM Util.", "Tamanho Cache", "Tamanho Disco", "Disco Disp.", "Disco Util." ]%>
+<% titulo4 = ["Upload", "Download", "Taxa de Utilização", "Taxa de Utilização", "", "" ]%>
+
+        <% conteudo1 = [@monitoramento.id, 
+	@monitoramento.ip, 
+	@monitoramento.equipamento_id, 
+	@monitoramento.equipamento.try(:descricao), 
+	@monitoramento.hora_registro,
+	"#{@monitoramento.sistema_iniciado}"
+	]%>
+
+	<% conteudo2 =[
+	"#{@monitoramento.uso_cpu_usuario}%",
+	"#{@monitoramento.uso_cpu_sistema}%",
+	"#{@monitoramento.porcentagem_cpu_ociosa}%",
+	"#{@monitoramento.tempo_cpu_ociosa.to_i/60}minutos",
+	number_to_human_size(@monitoramento.tamanho_swap.to_f*1000),
+	number_to_human_size(@monitoramento.swap_disponivel.to_f*1000)
+	]%>
+
+	<% conteudo3 =[
+	number_to_human_size(@monitoramento.tamanho_ram.to_f*1000),
+	number_to_human_size(@monitoramento.ram_utilizada.to_f*1000),
+	number_to_human_size(@monitoramento.tamanho_cache.to_f*1000),
+	number_to_human_size(@monitoramento.tamanho_disco.to_f*1000),
+	number_to_human_size(@monitoramento.disco_disponivel.to_f*1000),
+	number_to_human_size(@monitoramento.disco_utilizado.to_f*1000)
+
+	]%>
+
+        <% conteudo4 = ["#{@monitoramento.upload}Kbps", 
+	"#{@monitoramento.download}Kbps", 
+	"#{@monitoramento.taxa_utilizacao_banda}Kbps", 
+	"#{@monitoramento.porcentagem_utilizacao_banda}%", 
+	"",
+	""
+	]%>
+
+
+        <% i = 0 %>
+        <% titulos = [titulo1, titulo2, titulo3, titulo4]%>
+	<% conteudo = [conteudo1,conteudo2, conteudo3, conteudo4]%>
+        <% conteudo.each do |linha| %>
+          <tr bgcolor="#1E90FF" align=center>
+            <%# raise titulos[i].inspect%>
+            <% titulos[i].each do |t|%>
+            <td>
+              <%= t %>
+            </td>
+            <% end %>
+          </tr>
+          <tr>
+          <% linha.each do |item|%>
+            <td align=center>
+              <%= item %>&nbsp
+            </td>
+          <% end %>
+          </tr>
+          <% i = i + 1 %>
+        <% end %>
+</table>
+<!--##################################################################################################################################################
+# FIM                                                              MONITORAMENTO
+###################################################################################################################################################-->
+<!--##################################################################################################################################################
+# INICIO                                                             ALERTA
+###################################################################################################################################################-->
+<% unless @alerta.eql? nil%>
+<h3>Alertas:</h3>
+<table border rules=rows align='center' face="Comic Sans MS, arial, verdana" style="	margin: 1%;">
+<% titulo1 = ["ID", "IP", "Equip. ID", "Descrição Equip.", "Hora do Registro", "Monitoramento ID"]%>
+<% titulo2 = ["ERRO:"]%>
+
+        <% conteudo1 = [@alerta.id, 
+	@alerta.ip, 
+	@alerta.equipamento_id, 
+	@alerta.equipamento.try(:descricao), 
+	@alerta.created_at.to_s.gsub('UTC', ''),
+	@alerta.monitoramento_id
+	]%>
+
+	<% conteudo2 =[@alerta.descricao]%>
+
+        <% i = 0 %>
+        <% titulos = [titulo1, titulo2]%>
+	<% conteudo = [conteudo1,conteudo2]%>
+        <% conteudo.each do |linha| %>
+          <tr bgcolor="#1E90FF" align=center>
+            <% titulos[i].each do |t|%>
+            <% if i > 0 %>
+            <td colspan=6 align=left>
+            <% else %>
+            <td align=center>
+            <% end %>
+              <%= t %>
+            </td>
+            <% end %>
+          </tr>
+          <tr>
+          <% linha.each do |item|%>
+            <% if i > 0 %>
+            <td colspan=6>
+            <% else %>
+            <td align=center>
+            <% end %>
+              <%= item %>&nbsp
+            </td>
+          <% end %>
+          </tr>
+          <% i = i + 1 %>
+        <% end %>
+</table>
+<% end %>
+<!--##################################################################################################################################################
+# FIM                                                                ALERTA
+###################################################################################################################################################-->
+
+<!--##################################################################################################################################################
+# INICIO                                                        LIMITE EQUIPAMENTO 
+###################################################################################################################################################-->
+<% unless @monitoramento.equipamento_id.eql? nil %>
+<h3>Limite Equipamento:</h3>
+<table border rules=rows align='center' face="Comic Sans MS, arial, verdana" style="	margin: 1%;">
+<% titulo1 = ["ID", "IP", "Descricao", "Monitorado", ""]%>
+<% titulo2 = ["CPU usuario", "CPU sistema","SWAP Disp.","RAM Disp", "Disco Disp." ]%>
+<% titulo3 = ["Upload", "Download", "Taxa de Utilização", "Taxa de Utilização", "" ]%>
+<% if @monitoramento.equipamento.monitorar.eql? true 
+      monitorar = "sim"
+   else
+      monitorar = "não"
+   end
+%>
+
+        <% conteudo1 = [@monitoramento.equipamento.id, 
+	@monitoramento.equipamento.ip, 
+	@monitoramento.equipamento.try(:descricao),
+	monitorar,""
+	]%>
+
+	<% conteudo2 =[
+	"#{@monitoramento.equipamento.uso_cpu_usuario}%",
+	"#{@monitoramento.equipamento.uso_cpu_sistema}%",
+	number_to_human_size(@monitoramento.equipamento.swap_disponivel.to_f*1000),
+	number_to_human_size(@monitoramento.equipamento.ram_disponivel.to_f*1000),
+	number_to_human_size(@monitoramento.equipamento.disco_disponivel.to_f*1000)
+	]%>
+
+        <% conteudo3 = ["#{@monitoramento.upload}Kbps", 
+	"#{@monitoramento.download}Kbps", 
+	"#{@monitoramento.taxa_utilizacao_banda}Kbps", 
+	"#{@monitoramento.porcentagem_utilizacao_banda}%",
+	""
+	]%>
+
+
+        <% i = 0 %>
+        <% titulos = [titulo1, titulo2, titulo3]%>
+	<% conteudo = [conteudo1,conteudo2, conteudo3]%>
+        <% conteudo.each do |linha| %>
+          <tr bgcolor="#1E90FF" align=center>
+            <%# raise titulos[i].inspect%>
+            <% titulos[i].each do |t|%>
+            <td>
+              <%= t %>
+            </td>
+            <% end %>
+          </tr>
+          <tr>
+          <% linha.each do |item|%>
+            <td align=center>
+              <%= item %>&nbsp
+            </td>
+          <% end %>
+          </tr>
+          <% i = i + 1 %>
+        <% end %>
+</table>
+<% end %>
+<!--##################################################################################################################################################
+# FIM                                                           LIMITE EQUIPAMENTO
+###################################################################################################################################################-->

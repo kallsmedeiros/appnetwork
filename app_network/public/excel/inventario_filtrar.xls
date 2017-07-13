@@ -1,0 +1,7 @@
+inventario;
+ID;	Descricao;	IP;	Cancelado;	Monitorado;
+1;	Servidor-SP Dell;	192.168.25.10;	false;	true;
+2;	Servidor-AC Dell;	192.168.25.70;	false;	true;
+3;	Desktop Fatec ;	192.168.42.88;	false;	false;
+4;	teste;	192.168.25.12;	false;	false;
+5;	teste;	192.168.25.15;	true;	false;

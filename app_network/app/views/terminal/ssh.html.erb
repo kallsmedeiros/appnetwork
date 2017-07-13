@@ -1,0 +1,15 @@
+<div align=center>
+<form action="ssh">
+    <table>
+      <tr>
+        <td>comando:
+        </td>
+        <td><%=@local%>:</td>
+        <td colspan="2"><input type="text" name="form[comando]" value="">&nbsp
+        <%= image_tag("/imagens/informacao.png", size: "21x21", title: "Para instalar o SNMP em sua maquina cliente utilize o comando 'install snmp' (sem aspas) entre como Usuario root!")%>
+        </td>
+      </tr>
+    </table></br>
+    <%= text_area(:form, :teste, cols: 61, rows: 8, :placeholder => "#{@res}")%>
+</form>
+</div>

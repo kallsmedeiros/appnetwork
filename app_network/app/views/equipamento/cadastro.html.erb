@@ -1,0 +1,114 @@
+<h3>Cadastro Equipamento:</h3>
+    <div class="total">
+      <div class="cadastro">
+        <form action="/equipamento/cadastro_do">
+          <table>
+            <tr>
+              <td>Descrição:</td>
+              <td><input type="text" name="form[descricao]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Tipo:</td>
+              <td>
+                <select name="form[tipo]" style="width: 240px" >
+                  <option value=""></option>
+                  <option value="desktop">Desktop</option>
+                  <option value="router"> Router </option>
+                  <option value="server"> Server </option>
+                  <option value="switch"> Switch </option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>IP:</td>
+              <td><input type="text" name="form[ip]" maxlength="15" OnKeyPress="formatar('###.###.###.###', this)" style="width: 110px" >
+              Mask:
+              <select name="form[mascara_rede]" style="width: 60px" >
+                <option value=''></option>
+                <% mascara = [255,255,255,255] %>
+                <% barra = 32%>
+                <% mascara.each do |index|%>
+                    <% var = 0 %>
+                    <% while index > 0 do %>
+                      <% if not barra.eql? 32 %>
+                        <% if not barra < 8 %>
+                          <% if barra > 24 and barra < 32 %>
+                            <option value="<%=mascara[3]%>.<%=mascara[2]%>.<%=mascara[1]%>.<%= index %>">/<%= barra %></option>
+                          <% elsif barra > 16 and barra <= 24 %>
+                            <option value="<%=mascara[3]%>.<%=mascara[2]%>.<%= index %>.0">/<%= barra %></option>
+                          <% elsif barra > 8 and barra <= 16%>
+                            <option value="<%=mascara[3]%>.<%= index %>.0.0">/<%= barra %></option>
+                          <% else %>
+                            <option value="<%=mascara[3]%>.0.0.0">/<%= barra %></option>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                      <% if var.eql? 0 %>
+                        <%var = 1%>
+                      <% else %>
+                        <%var = var*2%>
+                      <% end %>             
+                      <% barra = barra-1 %>
+                      <% index = index-var%>
+                  <% end %>
+                <% end %>
+
+              </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Mac Address:</td>
+              <td><input type="text" name="form[mac_address]" maxlength="17" OnKeyPress="formatar('##:##:##:##:##:##', this)">
+            </tr>
+            <tr>
+              <td>Especificacao Tecnica:</td>
+              <td><%= text_area(:form, :especificacao_tecnica, cols: 32, rows: 4)%></td>
+            </tr>
+            <tr>
+              <td>Observações:</td>
+              <td><%= text_area(:form, :observacao, cols: 32, rows: 4)%></td>
+            </tr>
+            <tr>
+              <td>Marca:</td>
+              <td><input type="text" name="form[marca]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Modelo:</td>
+              <td><input type="text" name="form[modelo]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Versão:</td>
+              <td><input type="text" name="form[versao]" value=""><br></td>
+            </tr>
+             <tr>
+              <td>Numero de Serie:</td>
+              <td><input type="text" name="form[numero_serie]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Data de Garantia:</td>
+              <td><%= date_select('data_garantia', 'date', :start_year => 2000, :end_year => 2200) %>
+              </td>
+            </tr>
+            <tr>
+              <td>Local de Backup:</td>
+              <td><input type="text" name="form[local_backup]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Cancelado:</td>
+              <td><input type="radio" name="form[cancelado]" value="true">Sim
+                  <input type="radio" name="form[cancelado]" value="false" checked>Não<br>
+              </td>
+            </tr>
+            <tr>
+              <td>Monitorar Equipamento?:</td>
+              <td><input type="radio" name="form[monitorar]" value="true">Sim
+                  <input type="radio" name="form[monitorar]" value="false" checked>Não<br>
+              </td>
+            </tr>
+            <tr>
+              <td align="left"><input type="submit" value="Enviar"></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>

@@ -1,0 +1,34 @@
+ <h3>Editar Monitoramento:</h3>
+    <div class="total">
+      <div class="cadastro">
+        <form action="/monitoramento/tabela">
+          <table>
+            <tr>
+              <td>Colunas:</td>
+              <td>
+                <select name="form[coluna]">
+                  <% index_coluna = 1%>
+                  <% @equipamentos.each do %>                
+                    <option value=<%= index_coluna.to_i %>><%= index_coluna%></option>
+                    <% index_coluna =index_coluna+1%>
+                  <% end %>
+                </select>
+              </td>
+              <td>Linhas:</td>
+              <td>
+                <select name="form[linha]">
+                  <% index_linha = 1%>
+                  <% @equipamentos.each do %>                
+                    <option value=<%= index_linha.to_i %>><%= index_linha%></option>
+                    <% index_linha =index_linha+1%>
+                  <% end %>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td align="left"><input type="submit" value="Enviar"></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div

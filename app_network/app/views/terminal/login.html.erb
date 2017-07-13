@@ -1,0 +1,28 @@
+  <form action="insert">
+    <table>
+      <tr>
+        <td>Login:</td>
+        <td colspan="2"><input type="text" name="form[login]" value=""><br></td>
+      </tr>
+      <tr>
+        <td>Senha:</td>
+        <td colspan="2"><input type="password" name="form[senha]" value=""><br></td>
+      </tr>
+         <% @equipamento.acesso.each do |acesso| %>
+           <tr>
+           <td>Id</td>
+           <td>Login</td>
+           <td>Senha</td>
+           </tr>
+           <tr>
+           <td><input type="radio" name="form[acesso_id]" value="<%= acesso.id %>"><%= acesso.id %></td>
+           <td><font size="2" face="Comic Sans MS">&nbsp<%= acesso.login %></font></td>
+           <td><font size="2" face="Comic Sans MS">&nbsp<%= acesso.senha %></font></td>
+           </tr>
+         <% end %>
+      <tr>
+        <td align="left"><input type="submit" value="Enviar"></td>
+        <td><input type="radio" name="form[equipamento_id]" value="<%= @equipamento.id %>" checked></td>
+      </tr>
+     </table>
+  </form>

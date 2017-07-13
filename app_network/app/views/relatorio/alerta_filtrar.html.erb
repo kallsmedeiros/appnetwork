@@ -1,0 +1,75 @@
+<h3>Alerta Filtrar:</h3>
+<div align=center>
+<form action="/relatorio/alerta_filtrar_do">
+<table>
+  <tr>
+    <td>Equipamento ID:</td>
+    <td>
+      <input type="number" name="form[id]">
+    <td>
+  </tr>
+  <tr>
+    <td>Data de Alerta:</td>
+    <td>
+      <%= date_select('form[data_inicio]', 'date', :start_year => 2000, :end_year => 2200) %>
+    </td>
+  </tr>
+  <tr>
+     <td align=right>
+        até: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     </td>
+     <td>
+      <%= date_select('form[data_fim]', 'date', :start_year => 2000, :end_year => 2200) %>
+    </td>
+  </tr>
+  <tr>
+    <td>Filtrar por CPU:</td>
+    <td align="left">
+      <input type="radio" name="form[cpu]" value="true" >sim
+      <input type="radio" name="form[cpu]" value="false" checked>não
+    </td>
+  </tr>
+  <tr>
+    <td>Filtrar por SWAP:</td>
+    <td align="left">
+      <input type="radio" name="form[swap]" value="true">sim
+      <input type="radio" name="form[swap]" value="false" checked>não
+    </td>
+  </tr>
+  <tr>
+    <td>Filtrar por RAM:</td>
+    <td align="left">
+      <input type="radio" name="form[ram]" value="true">sim
+      <input type="radio" name="form[ram]" value="false" checked>não
+    </td>
+  </tr>
+  <tr>
+    <td>Filtrar por HD:</td>
+    <td align="left">
+      <input type="radio" name="form[disco]" value="true">sim
+      <input type="radio" name="form[disco]" value="false" checked>não
+    </td>
+  </tr>
+  <tr>
+    <td>Filtrar por Banda:</td>
+    <td align="left">
+      <input type="radio" name="form[banda]" value="true">sim
+      <input type="radio" name="form[banda]" value="false" checked>não
+    </td>
+  </tr>
+
+  <tr>
+    <td>Filtrar por Conexão:</td>
+    <td align="left">
+      <input type="radio" name="form[conexao]" value="true">sim
+      <input type="radio" name="form[conexao]" value="false" checked>não
+    </td>
+  </tr>
+
+  <tr>
+    <td align="left"><input type="submit" value="Enviar"></td>
+  </tr>
+ 
+</table>
+</form>
+</div>

@@ -1,0 +1,157 @@
+<style rel="stylesheet" type="text/css">
+#modal{ background:rgba(0,0,0, 0.5); width:100%; height:100%; position:fixed; left:0; top:0; display:none; z-index: 2;} 
+.modal-box{ background:#FFF; width:80%; height:500px; position:absolute; left:50%; top:50%; margin-left:-40%; margin-top:-250px; }
+.fechar{ padding:5px 10px; border:1px solid #CCC; position:absolute; right:3px; top:3px; border-radius:7px; color:#CCC; cursor:pointer;}
+.fechar:hover{ color:#666; border-color:#666;}
+</style>
+<div id="modal">
+  <div class="modal-box">
+    <div class="fechar">X</div>
+    <div class="modal-box-conteudo">
+      <iframe src="" id="terminalFrame" width="100%" marginwidth="0" height="500px" marginheight="0" align="middle" scrolling="auto"></iframe>
+    </div>
+  </div>
+</div>
+<% @arquivo.each do |arq|%>
+  <% @arquivo_vetor = arq.scan(/\w+/)%>
+<%end%>
+<% linha = @arquivo_vetor[0]%>
+<% coluna = @arquivo_vetor[1]%>
+<% index = 2 %>
+<div style="width:76%; position:relative; left:2%; top:20px; z-index: 1;" >
+<table align=center >
+<% for i in 1..linha.to_i %>
+  <tr>
+    <% for j in 1..coluna.to_i %>
+      <% if @arquivo_vetor[index].to_s.eql? "i"%>
+        <td height="140px" width="160"></td>
+      <%else%>
+        <% @equipamentos.each do |equipamento|%> 
+          <% if equipamento.id.eql? @arquivo_vetor[index].to_i %>
+            <% if equipamento.tipo.eql? "server"
+               tamanho = "60x80"
+            elsif equipamento.tipo.eql? 'switch'
+               tamanho = "80x60"
+            else
+               tamanho = "70x70"
+            end
+            %>
+            <td height="140px" width="160">
+              <div>
+                  <table>
+                    <tr>
+                      <td colspan="2"><%= "#{equipamento.try(:id)}-#{equipamento.try(:descricao)}" if not equipamento.try(:id).nil? %></td>
+                    </tr>
+                    <tr>
+                      <td>
+                         <% if not equipamento.alertas.last.try(:monitoramento).try(:id).eql? equipamento.monitoramentos.last.try(:id)  %>
+                           <%= image_tag("/imagens/bola_verde.png", size: "25x25") if not equipamento.try(:id).nil?%>
+                         <% else equipamento.alertas.last.try(:monitoramento).try(:id).eql? equipamento.monitoramentos.last.try(:id)  %>
+                           <%= image_tag("/imagens/bola_vermelha.png", size: "25x25", title: "#{equipamento.alertas.last.try(:descricao)}") if not equipamento.try(:id).nil?%>
+                         <% end %>
+                         <a href="javascript:login(<%=equipamento.try(:id)%>);">
+                           <%= image_tag("/imagens/terminal.png", size: "25x25") if not equipamento.try(:id).nil?%>
+                         </a>
+                         <a href="javascript:grafico(<%=equipamento.try(:id)%>);">
+                          <% if @config.try(:tema).eql? "dark"%>
+                           <%= image_tag("/imagens/grafico_dark.png", size: "25x25") if not equipamento.try(:id).nil?%>
+                          <%else%>
+                           <%= image_tag("/imagens/grafico.png", size: "25x25") if not equipamento.try(:id).nil?%>
+                          <%end%>
+                         </a><br/>
+                      </td>
+                      <td height="100%" width="140px" align=center><a href="javascript:detalhes(<%=equipamento.try(:id)%>);">
+                         <%= image_tag("/imagens/#{equipamento.try(:tipo)}.png", size: tamanho) if not equipamento.try(:id).nil?%></a><br/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <font size="2">
+                        <% if equipamento.monitorar.eql? false%>
+                          <% if @config.try(:tema).eql? "dark"%>
+                            <a href="javascript:monitorado(<%=equipamento.try(:id)%>);" style="text-decoration:none; color: #fff;">não monitorado!</a>
+                          <%else%>
+                            <a href="javascript:monitorado(<%=equipamento.try(:id)%>);" style="text-decoration:none; color: #000;">não monitorado!</a>                          <%end%>
+                          <br>
+                        <% end %>
+                        <% if equipamento.monitoramentos.last.try(:id).nil?%>
+                          Nunca foi monitorado!
+                        <% else%>
+                          Ultimo monitoramento:<br>
+                          <%= equipamento.monitoramentos.last.hora_registro.to_time.to_s.sub('+0000','')%>
+                        <% end %>
+                        </font>
+                      </td>
+                    </tr>
+                 </table>
+              </div>
+            </td>
+          <% end %>
+        <% end %>
+      <% end %>
+      <% index = index+1 %>
+    <%end%>
+  </tr>
+<%end%>
+</table>
+</div>
+<div style="width:20%; position:absolute; left:78%; top:20px; z-index: 1;" >
+<font size=4><i>
+&nbsp
+&nbsp
+Ultimos alertas
+</font>
+</i>
+</br>
+</br>
+<font size=2><i>
+<% @alertas.each do |alerta|%>
+<%= alerta.equipamento_id %>-<%= alerta.descricao %><br/>
+<%= alerta.created_at %>
+</br>
+</br>
+<% end %>
+</font>
+</i>
+</div>
+<script>
+function terminal(VALOR){
+    var loc = "<%= url_for :controller => 'terminal', :action => 'index' %>?form[equipamento_id]="+VALOR;
+    document.getElementById('terminalFrame').setAttribute('src', loc);
+    modal();
+}
+
+function grafico(VALOR){
+    var loc = "<%= url_for :controller => 'grafico', :action => 'index' %>?form[equipamento_id]="+VALOR;
+    document.getElementById('terminalFrame').setAttribute('src', loc);
+    modal();
+}
+function detalhes(VALOR){
+    var loc = "<%= url_for :controller => 'equipamento', :action => 'detalhes' %>?form[equipamento_id]="+VALOR;
+    document.getElementById('terminalFrame').setAttribute('src', loc);
+    modal();
+}
+
+function modal() {
+  $('#modal').fadeIn(1500);
+  $('.fechar, #modal').click(function(event){   
+    if ( event.target !== this ){
+      return;
+    }
+    $('#modal').fadeOut(500);
+  });
+}
+function login(VALOR){
+    var loc = "<%= url_for :controller => 'terminal', :action => 'login' %>?form[equipamento_id]="+VALOR;
+    document.getElementById('terminalFrame').setAttribute('src', loc);
+    modal();
+}
+function monitorado(VALOR){
+    var loc = "<%= url_for :controller => 'equipamento', :action => 'cadastro_alerta' %>?form[equipamento_id]="+VALOR;
+    document.getElementById('terminalFrame').setAttribute('src', loc);
+    modal();
+}
+setTimeout(function(){
+   window.location.reload(1);
+}, 90000);
+</script>

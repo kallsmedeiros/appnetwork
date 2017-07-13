@@ -1,0 +1,61 @@
+<h5>Cadastro Alerta do Equipamento:</h5>
+<br/>
+    <div class="total">
+        <form action="/equipamento/cadastro_alerta_do">
+          <table>
+            <tr>
+              <td>IP:</td>
+              <td><input type="text" name="form[ip]" maxlength="15" OnKeyPress="formatar('###.###.###.###', this)" value="<%=@equipamento.ip%>" style="width: 110px" ></td>
+            </tr>
+            <tr>
+              <td>Uso de CPU pelo Usuario Acima de:</td>
+              <td><input type="number" name="form[uso_cpu_usuario]" value="<%=@equipamento.try(:uso_cpu_usuario)%>" style="width: 110px" >%</td>
+            </tr> 
+            <tr>
+              <td>Uso de CPU pelo Sistema Acima de:</td>
+              <td><input type="number" name="form[uso_cpu_sistema]" value="<%=@equipamento.try(:uso_cpu_sistema)%>" style="width: 110px" >%</td>
+            </tr> 
+            <tr>
+              <td>Swap Disponivel a baixo de:</td>
+              <td><input type="number" name="form[swap_disponivel]" value="<%=@equipamento.try(:swap_disponivel)%>" style="width: 110px" > kb</td>
+            </tr> 
+            <tr>
+              <td>RAM Disponivel a baixo de:</td>
+              <td><input type="number" name="form[ram_disponivel]" value="<%=@equipamento.try(:ram_disponivel)%>" style="width: 110px" > kb</td>
+            </tr> 
+            <tr>
+              <td>Disco disponivel a baixo de:</td>
+              <td><input type="number" name="form[disco_disponivel]" value="<%=@equipamento.try(:disco_disponivel)%>" style="width: 110px" > kb</td>
+            </tr>
+            <tr>
+              <td>Upload:</td>
+              <td><input type="number" name="form[upload]" value="<%=@equipamento.try(:upload)%>" style="width: 110px" >Kbps</td>
+            </tr>
+            <tr>
+              <td>Download:</td>
+              <td><input type="number" name="form[download]" value="<%=@equipamento.try(:download)%>" style="width: 110px" >Kbps</td>
+            </tr>
+            <tr>
+              <td>Taxa de Utilização de Banda:</td>
+              <td><input type="number" name="form[taxa_utilizacao]" value="<%=@equipamento.try(:taxa_utilizacao_banda)%>" style="width: 110px" >Kbps</td>
+            </tr>
+            <tr>
+              <td>Taxa de Utilização de Banda:</td>
+              <td><input type="number" name="form[porcentagem_utilizacao]" value="<%=@equipamento.try(:porcentagem_utilizacao_banda)%>" style="width: 110px" >%</td>
+            </tr>
+
+             <tr>
+              <td>Deseja Monitorar esse Equipamento:</td>
+              <% if @equipamento.monitorar.eql? true %>
+              <td><input type="radio" name="form[monitorar]" value="true" checked>sim<input type="radio" name="form[monitorar]" value="false" >não</td>
+              <% else %>
+              <td><input type="radio" name="form[monitorar]" value="true" >sim<input type="radio" name="form[monitorar]" value="false" checked>não</td>
+              <% end %>
+            </tr>            
+            <tr>
+              <td align=left><input type="radio" name="form[equipamento_id]" value="<%= @equipamento.id %>" checked>
+              <input type="submit" value="Enviar"></td>
+            </tr>
+           </table>
+        </form>
+    </div>

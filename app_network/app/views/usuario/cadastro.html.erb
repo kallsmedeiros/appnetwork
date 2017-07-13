@@ -1,0 +1,120 @@
+<h3>Cadastro Usuario:</h3>
+    <div class="total">
+      <div class="cadastro">
+        <form action="/usuario/cadastro_do">
+          <table>
+            <tr>
+              <td>Nome:</td>
+              <td><input type="text" name="form[nome]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Nome Completo:</td>
+              <td><input type="text" name="form[nome_completo]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Data de Nasc.:</td>
+              <td><%= date_select('data_nascimento', 'date', :start_year => 1900, :end_year => Date.today.year) %>
+</td>
+            </tr>
+            <tr>
+              <td>Sexo:</td>
+              <td><input type="radio" name="form[sexo]" value="masculino" checked> M<input type="radio" name="form[sexo]" value="feminino"> F<br></td>
+            </tr>
+            <tr>
+              <td>CPF:</td>
+              <td><input type="text" name="form[cpf]" value="" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)"><br></td>
+                    
+            </tr>
+            <tr>
+              <td>E-mail:</td>
+              <td><input type="text" name="form[email]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Receber E-mail:</td>
+              <td><input type="radio" name="form[receber_email]" value="true">sim<input type="radio" name="form[receber_email]" value="false" checked>não<br></td>
+            </tr>
+            <tr>
+              <td>Celular:</td>
+              <td><input type="text" name="form[celular]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Login:</td>
+              <td><input type="text" name="form[login]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Senha:</td>
+              <td><input type="password" name="form[senha]" value=""><br></td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Endereço:</td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Estado:</td>
+              <td>
+              <select name="form[estado]">
+                <option value="0">Selecione o Estado</option>
+                <option value="ac">Acre</option>
+                <option value="al">Alagoas</option>
+                <option value="ap">Amapá</option>
+                <option value="am">Amazonas</option>
+		<option value="ba">Bahia</option>
+		<option value="ce">Ceará</option>
+		<option value="df">Distrito Federal</option>
+		<option value="es">Espirito Santo</option>
+		<option value="go">Goiás</option>
+		<option value="ma">Maranhão</option>
+		<option value="ms">Mato Grosso do Sul</option>
+		<option value="mt">Mato Grosso</option>
+		<option value="mg">Minas Gerais</option>
+		<option value="pa">Pará</option>
+		<option value="pb">Paraíba</option>
+		<option value="pr">Paraná</option>
+		<option value="pe">Pernambuco</option>
+		<option value="pi">Piauí</option>
+		<option value="rj">Rio de Janeiro</option>
+		<option value="rn">Rio Grande do Norte</option>
+		<option value="rs">Rio Grande do Sul</option>
+		<option value="ro">Rondônia</option>
+		<option value="rr">Roraima</option>
+		<option value="sc">Santa Catarina</option>
+		<option value="sp">São Paulo</option>
+		<option value="se">Sergipe</option>
+		<option value="to">Tocantins</option>
+	    </select>
+            </td>
+            </tr>
+            <tr>
+              <td>Municipio:</td>
+              <td><input type="text" name="form[municipio]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Logradouro:</td>
+              <td><input type="text" name="form[logradouro]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Numero:</td>
+              <td><input type="text" name="form[numero]" value=""><br></td>
+            </tr>
+            <tr>
+              <td>Complemento:</td>
+              <td><input type="text" name="form[complemento]" value=""><br></td>
+            </tr>
+
+            <tr>
+              <td align="left"><input type="submit" value="Enviar"></td>
+              <% if @online.nil? %>
+                <td align="right">
+                  <a href="<%= url_for :controller => 'login', :action => 'index' -%>">Login</a>
+                </td>
+              <% end %>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>

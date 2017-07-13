@@ -1,0 +1,100 @@
+<style rel="stylesheet" type="text/css"> 
+#modal{ background:rgba(0,0,0, 0.5); width:100%; height:100%; position:fixed; left:0; top:0; display:none; z-index: 2;}
+.modal-box{ background:#FFF; width:80%; height:500px; position:absolute; left:50%; top:50%; margin-left:-40%; margin-top:-250px; }
+.fechar{ padding:5px 10px; border:1px solid #CCC; position:absolute; right:3px; top:3px; border-radius:7px; color:#CCC; cursor:pointer;}
+.fechar:hover{ color:#666; border-color:#666;}
+</style>
+<div id="modal">
+  <div class="modal-box">
+    <div class="fechar">X</div>
+    <div class="modal-box-conteudo">
+      <iframe src="" id="Frame" width="100%" marginwidth="0" height="500px" marginheight="0" align="middle" scrolling="auto"></iframe>
+    </div>
+  </div>
+</div>   
+<div align=center>
+<% titulo = ['ID', 'Nome', 'Data Nasc.', 'Sexo', 'CPF', 'Arquivado', 'Receber E-Mail', 'Celular', 'E-mail', 'Usuario de Alt.', 'Data de Alt.', 'Data Cadastro']%>
+<div>
+  <table border rules=rows align='center' face="Comic Sans MS, arial, verdana">
+    <tr bgcolor="#1E90FF">
+     <td></td>
+     <% titulo.each do |coluna| %>
+       <td><font size="2" face="Comic Sans MS">&nbsp<%= coluna %></font></td>
+     <% end %>
+    </tr>
+    <% @usuarios.each do | usuario |%>
+      <tr>
+        <td>
+          <% if @online.id.eql? usuario.id %>
+            <input type="radio" name="usuario_id" value="<%= usuario.id %>" checked> 
+          <% else %>
+            <input type="radio" name="usuario_id" value="<%= usuario.id %>">
+          <% end %>
+        </td>
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= usuario.id %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= usuario.nome %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= usuario.data_nascimento %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= usuario.sexo %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= usuario.cpf %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp
+              <% if usuario.arquivado.eql? true %>
+                sim 
+              <% else %>
+                não 
+              <% end %>
+            </font>
+        </td> 
+        <td align=center><font size="2" face="Comic Sans MS">&nbsp
+              <% if usuario.receber_email.eql? true %>
+                sim 
+              <% else %>
+                não 
+              <% end %>
+            </font>
+        </td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= usuario.celular %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= usuario.email %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= usuario.usuario_alteracao_id %></font></td>
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= usuario.updated_at.to_date %></font></td> 
+        <td><font size="2" face="Comic Sans MS">&nbsp<%= usuario.created_at.to_date %></font></td> 
+     <tr>
+    <% end %>
+  </table>
+  <p align=center>
+    <a href="javascript:editar();"><button>Editar</button></a>
+    <a href="javascript:detalhes();"><button>Detalhes</button></a>
+  </p>
+</div>
+</div>
+<script>
+function modal() {
+  $('#modal').fadeIn(1500);
+  $('.fechar, #modal').click(function(event){   
+    if ( event.target !== this ){
+      return;
+    }
+    $('#modal').fadeOut(500);
+  });
+}
+function detalhes(){
+    var usuario = verificar_selecionado('usuario_id');
+    var loc = "<%= url_for :controller => 'usuario', :action => 'detalhes' %>?form[usuario_id]="+usuario;
+    document.getElementById('Frame').setAttribute('src', loc);
+    modal();
+}
+
+function editar(){
+    var usuario = verificar_selecionado('usuario_id');
+    var loc = "<%= url_for :controller => 'usuario', :action => 'editar' %>?form[usuario_id]="+usuario;
+    document.getElementById('Frame').setAttribute('src', loc);
+    modal();
+}
+
+function verificar_selecionado(monitoramento) {
+    var radioButtons = document.getElementsByName(monitoramento);
+    for (var i = 0; i < radioButtons.length; i++) {
+        if (radioButtons[i].checked) return radioButtons[i].value;
+    }
+    return '';
+}
+</script>

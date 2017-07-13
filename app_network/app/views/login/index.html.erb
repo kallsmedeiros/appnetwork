@@ -1,0 +1,21 @@
+<div class="login">
+  <form action="/login/index_do">
+      <%= flash_message %>
+    <table>
+      <tr>
+        <td>Login:</td>
+        <td><input type="text" name="form[login]" value=""><br></td>
+      </tr>
+      <tr>
+        <td>Senha:</td>
+        <td><input type="password" name="form[senha]" value=""><br></td>
+      </tr>
+      <tr>
+        <td>
+          <a href="<%= url_for :controller => 'usuario', :action => 'cadastro' -%>">Cadastro</a>
+        </td>
+        <td align="right"><input type="submit" value="Entre"></td>
+      </tr>
+    </table>
+  </form>
+</div>

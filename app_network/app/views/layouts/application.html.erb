@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>App Network</title>
+    <!--<meta http-equiv="refresh" content="90">-->
+    <%= csrf_meta_tags %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'jquery310': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'RGraph/libraries/RGraph.common.core.js': 'reload' %>
+  <%unless @config.try(:menu).eql? "vertical"%>
+    <style>
+      body {
+        width: 100%;
+        margin-left: 0%;
+     }
+ 
+    </style>
+  <%end%>
+  </head>
+  <% if @config.try(:tema).eql? "dark"%>
+  <body style="background-color: #222222; color: #ffffff;">
+  <%else%>
+  <body style="background-color: #ffffff; color: #000000;" >
+  <%end%>
+    <div class="total">
+      <div class="topo">
+        <div>
+          <table style="height: 100%; width: 98%">
+            <tr>
+              <% if @online.nil?%>
+                <td>
+                  <% if @config.try(:tema).eql? "dark"%>
+                  <p align="left"><%= image_tag("/imagens/logo_dark.png", size: "400x260")%></p>
+                  <%else%>
+                  <p align="left"><%= image_tag("/imagens/logo.png", size: "400x260")%></p>
+                  <%end%>
+                </td>
+              <% end %>
+              <% unless @online.nil?%>
+                <td>
+                  <%unless @config.try(:menu).eql? "vertical"%>
+                    <%size = '200x100'%>
+                  <%else%>
+                    <%size = '300x165'%>
+                  <%end%>
+                  <% if @config.try(:tema).eql? "dark"%>
+                    <p align="left">
+                      <a href="<%= url_for :controller => 'home', :action => 'index' -%>">
+                        <%= image_tag("/imagens/logo_dark.png", size: "#{size}")%>
+                      </a>
+                    </p>
+                  <%else%>
+                    <p align="left">
+                      <a href="<%= url_for :controller => 'home', :action => 'index' -%>">
+                        <%= image_tag("/imagens/logo.png", size: "#{size}")%>
+                      </a>
+                    </p>
+                  <%end%>
+                </td>
+                <td><%= flash_message %></td>
+                <td align="right">
+                  Olá, <%= @online.nome %></br>
+                  <a href="<%= url_for :controller => 'configuracao', :action => 'sincronizar_monitoramento' -%>">
+                  <%= image_tag("/imagens/sincronizar_monitoramento.png", size: "25x28", title: "Sincronizar Monitoramento")%></a>
+                  <a href="<%= url_for :controller => 'configuracao', :action => 'index' -%>">
+                  <%= image_tag("/imagens/configuracao.png", size: "22x22", title: "Configuração")%></a>
+                  <a href="<%= url_for :controller => 'application', :action => 'logout' -%>">
+                  <%= image_tag("/imagens/logout.png", size: "21x21", title: "Logout")%></a>
+
+                </td>
+              <% end %>
+            </tr>
+          </table>
+        </div>
+        <% unless @online.nil?%>
+        <%unless @config.try(:menu).eql? "vertical"%>
+        <div align=center><br>
+          <div id="cssmenu" style="height: 100%; width: 99%; top: -25px; "><div id="menu-button">Menu</div>
+          <ul>
+            <li><a href="<%= url_for :controller => 'home', :action => 'index' -%>"><i></i> Home</a></li>
+              <li class="has-sub"><span class="submenu-button"></span><a href="#"><i></i>Cadastro</a>
+                <ul>
+                  <li class="has-sub"><span class="submenu-button"></span><a href="#">Usuario</a>
+                    <ul>
+                       <li><a href="<%= url_for :controller => 'usuario', :action => 'cadastro' -%>">Adicionar</a></li>
+                       <li><a href="<%= url_for :controller => 'usuario', :action => 'visualizar' -%>">Visualizar</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-sub"><span class="submenu-button"></span><a href="#">Equipamento</a>
+                     <ul>
+                       <li><a href="<%= url_for :controller => 'equipamento', :action => 'cadastro' -%>">Adicionar</a></li>
+                       <li><a href="<%= url_for :controller => 'equipamento', :action => 'visualizar' -%>">Visualizar</a></li>
+                    </ul>
+                </li>
+             </ul>
+           </li>
+           <li class="has-sub"><span class="submenu-button"></span><a href="#"><i></i>Monitoramento</a>
+             <ul>
+               <li><a href="<%= url_for :controller => 'monitoramento', :action => 'editar' -%>">Editar</a></li>
+               <li><a href="<%= url_for :controller => 'monitoramento', :action => 'index' -%>">Visualizar</a></li>
+             </ul>
+           </li>
+           <li class="has-sub"><span class="submenu-button"></span><a href="#"><i></i>Relatório</a>
+             <ul>
+               <li><a href="<%= url_for :controller => 'relatorio', :action => 'alerta_filtrar' -%>">Alerta Filtrar</a></li>
+               <li><a href="<%= url_for :controller => 'relatorio', :action => 'inventario_filtrar' -%>">Inventario Filtrar</a></li>
+               <li><a href="<%= url_for :controller => 'relatorio', :action => 'monitoramento_filtrar' -%>">Monitoramento Filtrar</a></li>
+             </ul>
+           </li>
+            <li><a href="<%= url_for :controller => 'configuracao', :action => 'index' -%>"><i></i>Configurações</a></li>
+         </ul>
+         </div>
+      </div>
+      <!--LATERAL-->
+     <%else%>
+<div id="lateral">
+<div id="menu">  			
+<h3 class="link-titulo">Usuario</h3>
+    <ul class="box">					
+       <li><a href="<%= url_for :controller => 'usuario', :action => 'cadastro' -%>">Adicionar</a></li>
+       <li><a href="<%= url_for :controller => 'usuario', :action => 'visualizar' -%>">Visualizar</a></li>
+    </ul>
+
+<h3 class="link-titulo">Equipamento</h3>
+    <ul class="box">
+      <li><a href="<%= url_for :controller => 'equipamento', :action => 'cadastro' -%>">Adicionar</a></li>
+      <li><a href="<%= url_for :controller => 'equipamento', :action => 'visualizar' -%>">Visualizar</a></li>
+    </ul>
+
+<h3 class="link-titulo">Monitoramento</h3>
+    <ul class="box">					
+      <li><a href="<%= url_for :controller => 'monitoramento', :action => 'editar' -%>">Editar</a></li>
+      <li><a href="<%= url_for :controller => 'monitoramento', :action => 'index' -%>">Visualizar</a></li>
+    </ul>
+
+<h3 class="link-titulo">Relatório</h3>
+    <ul class="box">
+       <li><a href="<%= url_for :controller => 'relatorio', :action => 'alerta_filtrar' -%>">Alerta Filtrar</a></li>
+       <li><a href="<%= url_for :controller => 'relatorio', :action => 'inventario_filtrar' -%>">Inventario Filtrar</a></li>
+       <li><a href="<%= url_for :controller => 'relatorio', :action => 'monitoramento_filtrar' -%>">Monitoramento Filtrar</a></li>
+    </ul>
+
+</div> <!-- /#menu -->
+</div id="link"> <!-- vazio --> <div>
+</div> <!-- /#lateral -->
+<%end%>
+
+<!--LATERAL-->
+
+
+      <% end %>
+      <div class="conteudo">
+           <%=  yield.force_encoding(Encoding::UTF_8) -%>
+      </div>
+      <div class="rodape"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,591 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+    .btn_img{
+      margin-bottom: -7px;
+      height: 23px;
+      width: 23px;
+      }
+
+
+    .total{
+      height: 100%;
+      width: 100%;
+      }
+    .topo{
+
+      height: 15%;
+      width: 100%;
+      /*position:absolute;*/
+     }
+
+    .conteudo{
+      /*background: #0000ff;*/
+      height: 85%;
+      width: 100%;
+      top: 50px;
+      position: relative;
+      }
+    .rodape{
+      background: #0000b3;
+      height: 10%;
+      width: 100%;
+      }
+
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+#cssmenu,
+#cssmenu ul,
+#cssmenu ul li,
+#cssmenu ul li a,
+#cssmenu #menu-button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  line-height: 1;
+  display: block;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#cssmenu:after,
+#cssmenu > ul:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+#cssmenu #menu-button {
+  display: none;
+}
+#cssmenu {
+  width: auto;
+  border-radius: 5px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  background: #00008b;
+  background: -o-linear-gradient(top, #0000be, #000062);
+  background: -ms-linear-gradient(top, #0000be, #000062);
+  background: -webkit-linear-gradient(top, #0000be, #000062);
+  background: -moz-linear-gradient(top, #0000be, #000062);
+  background: linear-gradient(to bottom, #0000be, #000062);
+  box-shadow: inset 0 -3px 0 #000053, inset 0 -3px 3px #000058, inset 0 2px 2px #0000f6, inset 1px 0 2px #000067, inset -1px 0 2px #000067, 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.06), 0 3px 3px rgba(0, 0, 0, 0.17), 2px 1px 2px rgba(0, 0, 0, 0.05), -2px 1px 2px rgba(0, 0, 0, 0.05);
+}
+#cssmenu.align-center > ul {
+  font-size: 0;
+  text-align: center;
+
+}
+#cssmenu.align-center ul ul {
+  text-align: left;
+}
+#cssmenu.align-center > ul > li {
+  display: inline-block;
+  float: none;
+}
+#cssmenu.align-right > ul > li {
+  float: right;
+}
+#cssmenu.align-right ul ul {
+  text-align: right;
+}
+#cssmenu > ul > li {
+  float: left;
+}
+#cssmenu > ul > li > a {
+  padding: 20px 25px;
+  font-size: 13px;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  font-weight: 700;
+  text-decoration: none;
+  -webkit-transition: color .2s ease;
+  -moz-transition: color .2s ease;
+  -ms-transition: color .2s ease;
+  -o-transition: color .2s ease;
+  transition: color .2s ease;
+}
+#cssmenu > ul > li:hover > a,
+#cssmenu > ul > li > a:hover,
+#cssmenu > ul > li.active > a {
+  color: #cae5fd;
+}
+#cssmenu > ul > li.has-sub > a {
+  padding-right: 40px;
+}
+#cssmenu ul > li.has-sub > a:after {
+  content: '';
+  position: absolute;
+  right: 5px;
+  top: 17.5px;
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: #00008b;
+  background: -webkit-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: -ms-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: -moz-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: -o-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: linear-gradient(to bottom, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  box-shadow: inset 0 -1px 1px #00005d, inset 0 2px 1px #0000d7;
+  background-size: 36px 36px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -ms-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+}
+#cssmenu ul > li.has-sub:hover > a:after {
+  background-position: 0 -18px;
+}
+#cssmenu ul > li.has-sub > a:before {
+  content: '';
+  position: absolute;
+  right: 11px;
+  top: 25.5px;
+  display: block;
+  width: 0;
+  height: 0;
+  border: 3px solid transparent;
+  border-top-color: #ffffff;
+  z-index: 1;
+}
+#cssmenu ul > li.has-sub:hover > a:before {
+  border-top-color: #000025;
+}
+#cssmenu ul ul {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  -webkit-transition: top .2s ease, opacity .2s ease;
+  -moz-transition: top .2s ease, opacity .2s ease;
+  -ms-transition: top .2s ease, opacity .2s ease;
+  -o-transition: top .2s ease, opacity .2s ease;
+  transition: top .2s ease, opacity .2s ease;
+  z-index: 100;
+}
+#cssmenu > ul > li > ul {
+  top: 91px;
+  padding-top: 8px;
+  border-radius: 5px;
+}
+#cssmenu > ul > li:hover > ul {
+  left: auto;
+  top: 51px;
+  opacity: 1;
+}
+#cssmenu.align-right > ul > li:hover > ul {
+  right: 0;
+}
+#cssmenu ul ul ul {
+  top: 40px;
+}
+#cssmenu ul ul > li:hover > ul {
+  top: 0;
+  left: 178px;
+  padding-left: 10px;
+  opacity: 1;
+}
+#cssmenu.align-right ul ul > li:hover > ul {
+  left: auto;
+  right: 178px;
+  padding-left: 0;
+  padding-right: 10px;
+  opacity: 1;
+}
+#cssmenu ul ul li a {
+  width: 180px;
+  padding: 12px 25px;
+  font-size: 13px;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  text-decoration: none;
+  background: #00008b;
+  -webkit-transition: color .2s ease;
+  -moz-transition: color .2s ease;
+  -ms-transition: color .2s ease;
+  -o-transition: color .2s ease;
+  transition: color .2s ease;
+}
+#cssmenu ul ul li:hover > a,
+#cssmenu ul ul li > a:hover,
+#cssmenu ul ul li.active > a {
+  color: #cae5fd;
+}
+#cssmenu ul ul li:first-child > a {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  box-shadow: inset 0 2px 2px #0000e2;
+}
+#cssmenu ul ul li:last-child > a {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: inset 0 -3px 0 #000072, inset 0 -3px 3px #000058, 0 1px 1px rgba(0, 0, 0, 0.03), 0 2px 2px rgba(0, 0, 0, 0.05), 0 2px 3px rgba(0, 0, 0, 0.13);
+}
+#cssmenu ul ul > li.has-sub > a:after {
+  right: 12px;
+  top: 9.5px;
+  background: #00008b;
+  background: -webkit-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: -ms-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: -moz-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: -o-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: linear-gradient(to bottom, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  box-shadow: inset 0 -1px 1px #00005d, inset 0 2px 1px #0000d7;
+  background-size: 36px 36px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+#cssmenu.align-right ul ul > li.has-sub > a:after {
+  right: auto;
+  left: 12px;
+}
+#cssmenu ul ul > li.has-sub:hover > a:after {
+  background-position: 0 -18px;
+}
+#cssmenu ul ul > li.has-sub > a:before {
+  top: 15.5px;
+  right: 16px;
+  border-top-color: transparent;
+  border-left-color: #ffffff;
+}
+#cssmenu.align-right ul ul > li.has-sub > a:before {
+  top: 15.5px;
+  right: auto;
+  left: 16px;
+  border-top-color: transparent;
+  border-right-color: #ffffff;
+  border-left-color: transparent;
+}
+#cssmenu ul ul > li.has-sub:hover > a:before {
+  border-top-color: transparent;
+  border-left-color: #00003e;
+}
+#cssmenu.align-right ul ul > li.has-sub:hover > a:before {
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: #00003e;
+}
+#cssmenu.small-screen {
+  width: 100%;
+}
+#cssmenu.small-screen ul,
+#cssmenu.small-screen ul ul,
+#cssmenu.small-screen ul ul ul,
+#cssmenu.small-screen > ul,
+#cssmenu.small-screen.align-center > ul,
+#cssmenu.small-screen > ul > li > ul,
+#cssmenu.small-screen > ul > li:hover > ul,
+#cssmenu.small-screen ul ul li:hover > ul,
+#cssmenu.small-screen ul ul ul li:hover > ul,
+#cssmenu.small-screen.align-right ul ul,
+#cssmenu.small-screen.align-right ul ul li:hover > ul,
+#cssmenu.small-screen.align-right ul ul ul li:hover > ul {
+  position: relative;
+  left: 0;
+  right: auto;
+  top: 0;
+  width: 100%;
+  display: none;
+  padding: 0;
+  opacity: 1;
+  text-align: left;
+}
+#cssmenu.small-screen ul li {
+  width: 100%;
+  border-top: 1px solid rgba(120, 120, 120, 0.2);
+}
+#cssmenu.small-screen > ul > li > a,
+#cssmenu.small-screen ul ul li a,
+#cssmenu.small-screen ul ul li:first-child > a,
+#cssmenu.small-screen ul ul li:last-child > a {
+  width: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+}
+#cssmenu.small-screen ul li a {
+  padding-left: 12.5px;
+}
+#cssmenu.small-screen ul ul li a {
+  padding: 14px 25px 14px 27.5px;
+}
+#cssmenu.small-screen ul ul ul li a {
+  padding-left: 42.5px;
+}
+#cssmenu.small-screen ul ul ul ul li a {
+  padding-left: 57.5px;
+}
+#cssmenu.small-screen > ul > li.has-sub > a:after,
+#cssmenu.small-screen > ul > li.has-sub > a:before,
+#cssmenu.small-screen ul ul li.has-sub > a:after,
+#cssmenu.small-screen ul ul li.has-sub > a:before {
+  display: none;
+}
+#cssmenu.small-screen #menu-button {
+  position: relative;
+  display: block;
+  padding: 20px;
+  padding-left: 12.5px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #ffffff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+#cssmenu.small-screen .submenu-button {
+  position: absolute;
+  right: 0;
+  display: block;
+  width: 53px;
+  height: 53px;
+  border-left: 1px solid rgba(120, 120, 120, 0.2);
+  z-index: 1;
+  cursor: pointer;
+}
+#cssmenu.small-screen ul ul .submenu-button {
+  height: 41px;
+}
+#cssmenu.small-screen ul .submenu-button:after,
+#cssmenu.small-screen #menu-button:after {
+  content: '';
+  position: absolute;
+  right: 12.5px;
+  top: 12.5px;
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 15px;
+  background: #00008b;
+  background: -webkit-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: -ms-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: -moz-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: -o-linear-gradient(top, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  background: linear-gradient(to bottom, #0000aa 0%, #00009a 25%, #000077 50%, #0000aa 75%, #00009a 100%);
+  box-shadow: inset 0 -1px 1px #00005d, inset 0 2px 1px #0000d7;
+  background-size: 56px 56px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -ms-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+}
+#cssmenu.small-screen ul .submenu-button.submenu-opened:after,
+#cssmenu.small-screen #menu-button.menu-opened:after {
+  background-position: 0 -28px;
+}
+#cssmenu.small-screen ul ul .submenu-button:after {
+  top: 6.5px;
+}
+#cssmenu.small-screen #menu-button:before,
+#cssmenu.small-screen .submenu-button:before {
+  content: '';
+  position: absolute;
+  right: 22.5px;
+  top: 25.5px;
+  display: block;
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+  border-top-color: #ffffff;
+  z-index: 1000;
+}
+#cssmenu.small-screen ul ul .submenu-button:before {
+  top: 19.5px;
+}
+#cssmenu.small-screen #menu-button.menu-opened:before,
+#cssmenu.small-screen .submenu-button.submenu-opened:before {
+  border-top-color: #000025;
+}
+#cssmenu.small-screen.select-list {
+  padding: 5px;
+}
+
+/*#################################lateral*/
+@charset "UTF-8";
+/* =CSS Reset */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+*, html, body {
+	margin:0;
+	padding:0;
+	}
+... /* mais regras CSS reset */
+
+/* regra para o box-sizing */
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+/* regra para o clear float */
+.cf:before,
+.cf:after {content: " ";display: table;}
+.cf:after {clear: both;}
+.cf {*zoom: 1;}
+body {
+	margin-left:70px; /* espaço à esquerda para a barra vertical vísivel do menu */
+	font:  16px Verdana, Helvetica, Arial, sans-serif;
+	}	
+/*Esconde o menu*/
+#lateral {
+	padding:0 2px 0 0;
+	-moz-transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+			-o-transition: all 0.5s ease;
+				transition: all 0.5s ease;
+	font-size:14px;
+/* background: #0000ff;
+  background: -webkit-linear-gradient(top, #1f1fff 0%, #0f0fff 25%, #0000eb 50%, #1f1fff 75%, #0f0fff 100%);
+  background: -ms-linear-gradient(top, #1f1fff 0%, #0f0fff 25%, #0000eb 50%, #1f1fff 75%, #0f0fff 100%);
+  background: -moz-linear-gradient(top, #1f1fff 0%, #0f0fff 25%, #0000eb 50%, #1f1fff 75%, #0f0fff 100%);
+  background: -o-linear-gradient(top, #1f1fff 0%, #0f0fff 25%, #0000eb 50%, #1f1fff 75%, #0f0fff 100%);
+  background: linear-gradient(to bottom, #1f1fff 0%, #0f0fff 25%, #0000eb 50%, #1f1fff 75%, #0f0fff 100%);
+*/
+	background:rgb(44,62,80);
+	background-image: -moz-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));
+     background-image: -webkit-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));
+      background-image: -o-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79) );
+       background-image: -ms-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));
+        background-image: linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));
+
+	height:100%;
+	overflow:hidden;
+	width:370px; 
+	position:fixed;
+	top:0;
+	left:-320px;
+	}
+#lateral:before {
+	z-index:3;
+	content: url(/imagens/icon-menu-lateral.png);
+	font-size:14px;
+	color:white;
+	position:fixed;
+	left:4px;
+	top:45px;
+	}
+#lateral:hover:before, #lateral:focus:before {
+left:-500px
+	}
+#lateral:hover, #lateral:focus,  #lateral:active  {
+	overflow-y:scroll;
+	-moz-transform: translate(320px, 0);
+		-webkit-transform: translate(320px, 0);
+			-o-transform: translate(320px, 0);
+				transform: translate(320px, 0);
+	padding-right:0;
+        z-index: 1000;
+}
+	}
+
+#lateral .box {
+	list-style-type:none;
+	margin-bottom:1em;;
+	padding-bottom:1em;
+	}
+#lateral h3 {
+	display:inline-block;
+	font-weight:bold;
+	font-size:1.6em;
+	font-style:normal;
+	padding-bottom:0.2em;
+	margin: 2em 0 2em 0.81em;
+	color:rgb(255,255,255);
+	border-bottom: 4px solid rgb(255,255,255);
+	}
+#menu {
+	font-style:italic;
+	position:relative;
+	font-size:1.0em;
+	margin:1em 0 1em -1em;
+	padding:0;
+	}
+#menu li {padding:0; margin:0;}
+#menu li a,  #menu li a:link {
+	font-size:1.2em;
+	color:rgb(255,255,255);
+	text-decoration: none;
+	padding: 0.8em 0 0.8em 1em;
+	display: block;
+	-moz-transition: all 1.2s ease;
+			-webkit-transition: all 1.2s ease;
+				-o-transition: all 1.2s ease;
+					transition: all 1.2s ease;
+	}
+#menu li a:hover {
+	color:rgb(255,255,255);
+	background-color:rgba(255,255,255,0.2);
+	-moz-transition: all 0.5s ease;
+			-webkit-transition: all 0.5s ease;
+				-o-transition: all 0.5s ease;
+					transition: all 0.5s ease;
+	}
+
+
+@media (max-width: 500px) {
+body {margin-left:0;background-size:100% 28em!important;}
+#lateral {
+	padding:0;
+	-moz-transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+			-o-transition: all 0.5s ease;
+				transition: all 0.5s ease;
+	font-size:1.2em;
+	height:100%;
+	overflow:auto;
+	width:100%; 
+	position:static;
+	top:0;
+	left:0;
+	}
+#lateral:before {
+	z-index:5;
+	width:0;
+	text-align:center;
+	content: "";
+	font-size:0;
+	color:white;
+	position:static;
+	top:0;
+	left:0;
+	display:inline-block; 
+	}
+#lateral:hover, #lateral:focus {
+	overflow:scroll;
+	-moz-transform: none;
+		-webkit-transform: none;
+			-o-transform:none;
+				transform:none;
+	}
+#menu li a {border-bottom:1px solid #ccc;}
+#menu li:first-child a {border-top:1px solid #ccc;}	
+}

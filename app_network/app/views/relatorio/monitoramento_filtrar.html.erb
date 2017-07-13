@@ -1,0 +1,33 @@
+<h3>Monitoramento Filtrar:</h3>
+<div align=center>
+<form action="/relatorio/monitoramento_filtrar_do">
+<table>
+  <tr>
+    <td>Equipamento ID:</td>
+    <td>
+      <input type="number" name="form[id]">
+    <td>
+  </tr>
+
+  <tr>
+    <td>Data de Monitoramento:</td>
+    <td>
+      <%= date_select('form[data_inicio]', 'date', :start_year => 2000, :end_year => 2200) %>
+    </td>
+  </tr>
+  <tr>
+     <td align=right>
+        até: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     </td>
+     <td>
+      <%= date_select('form[data_fim]', 'date', :start_year => 2000, :end_year => 2200) %>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="left"><input type="submit" value="Enviar"></td>
+  </tr>
+ 
+</table>
+</form>
+</div>

@@ -1,0 +1,103 @@
+<%
+obj_descricao = [
+                 "Hora de Registro",
+                 "IP",
+                 "Porcentagem de uso de CPU pelos usuários",
+                 "Tempo absoluto de uso de CPU pelos usuários",
+                 "Porcentagem de uso de CPU pelo sistema",
+                 "Tempo absoluto de uso de CPU pelo sistema",
+                 "Porcentagem de CPU ociosa",
+                 "Tempo absoluto de CPU ociosa",
+                 "Tamanho total da memória de troca (SWAP)",
+                 "Espaço disponível na memória de troca (SWAP)",
+                 "Total de memória RAM",
+                 "Total de memória RAM utilizada",
+                 "Total de memória RAM disponível",
+                 "Total de memória CACHE",
+                 "Tamanho total do disco (Kbytes)",
+                 "Espaço disponível no disco",
+                 "Espaço utilizado no disco",
+                 "Download",
+                 "Upload",
+                 "Taxa de Utilização de banda",
+                 "Taxa de Utilização de banda",
+                 "Sistema Iniciado"]
+
+obj_valor = [
+@ultimo_monitoramento.hora_registro,
+@ultimo_monitoramento.ip,
+"#{@ultimo_monitoramento.uso_cpu_usuario}%",
+"#{@ultimo_monitoramento.tempo_absoluto_cpu_usuario.to_i/60}minutos",
+"#{@ultimo_monitoramento.uso_cpu_sistema}%",
+"#{@ultimo_monitoramento.tempo_absoluto_cpu_sistema.to_i/60}minutos",
+"#{@ultimo_monitoramento.porcentagem_cpu_ociosa}%",
+"#{@ultimo_monitoramento.tempo_cpu_ociosa.to_i/60}minutos",
+@ultimo_monitoramento.tamanho_swap,
+@ultimo_monitoramento.swap_disponivel,
+@ultimo_monitoramento.tamanho_ram,
+@ultimo_monitoramento.ram_utilizada,
+@ultimo_monitoramento.ram_disponivel,
+@ultimo_monitoramento.tamanho_cache,
+"#{@ultimo_monitoramento.tamanho_disco.to_f/1000000}GBs",
+"#{@ultimo_monitoramento.disco_disponivel.to_f/1000000}GBs",
+"#{@ultimo_monitoramento.disco_utilizado.to_f/1000000}GBs",
+@ultimo_monitoramento.download,
+@ultimo_monitoramento.upload,
+"#{@ultimo_monitoramento.taxa_utilizacao_banda}Kbps",
+"#{@ultimo_monitoramento.porcentagem_utilizacao_banda}%",
+"#{@ultimo_monitoramento.sistema_iniciado}"
+]
+i = 0
+%>
+<div align=center>
+<table align=center>
+<% if not @equipamento.alertas.last.eql? nil%>
+<tr>
+<td>
+ULTIMO ALERTA:
+     <tr bgcolor="#1E90FF">
+       <td>Descrição</td>
+       <td>Data</td>
+     </tr>
+      <tr>
+        <td><%= @equipamento.alertas.last.try(:descricao)%></td>
+        <td><%= @equipamento.alertas.last.try(:created_at)%></td>
+      </tr>
+</td>
+</tr>
+<tr>
+<td><br><br>
+</td>
+</tr>
+<%end%>
+<tr>
+<td>
+ULTIMO MONITORAMENTO:
+     <tr bgcolor="#1E90FF">
+       <td>Descrição</td>
+       <td>Valor</td>
+     </tr>
+    <%obj_valor.each do%>
+      <tr>
+        <td><%= obj_descricao[i]%></td>
+        <td><%= obj_valor[i]%></td>
+      </tr>
+    <% i = i+1%>
+    <% end %>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<p align="center"><%= image_tag("/imagens/graficos/cpu_porcentagem.png", size: "600x300") %>
+<%= image_tag("/imagens/graficos/cpu_tempo.png", size: "600x300") %>
+</p>
+<br/>
+<p align="center"><%= image_tag("/imagens/graficos/memoria_ram.png", size: "600x300") %>
+<%= image_tag("/imagens/graficos/memoria_swap.png", size: "600x300") %>
+</p>
+<br/>
+<p align="center"><%= image_tag("/imagens/graficos/banda.png", size: "600x300") %>
+<%= image_tag("/imagens/graficos/consumo_banda.png", size: "600x300") %></p>
+<br/>
+<p align="center"><%= image_tag("/imagens/graficos/disco.png", size: "600x300") %></p>
